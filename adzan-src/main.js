@@ -24,28 +24,24 @@ var PrayerTimes = {
                 t_dzhur = {
                         hours   : p_dzhur[0],
                         minutes : p_dzhur[1],
-                        minuter : parseInt(p_dzhur[1]) - factor
                 };
                 
                 var p_ashar = parsedJson.data.timings.Asr.split(":");
                 t_ashar = {
                         hours   : p_ashar[0],
                         minutes : p_ashar[1],
-                        minuter : parseInt(p_ashar[1]) - factor
                 };
                 
                 var p_magrb = parsedJson.data.timings.Maghrib.split(":");
                 t_magrb = {
                         hours   : p_magrb[0],
                         minutes : p_magrb[1],
-                        minuter : parseInt(p_magrb[1]) - factor
                 };
                 
                 var p_subuh = parsedJson.data.timings.Fajr.split(":");
                 t_subuh = {
                         hours   : p_subuh[0],
                         minutes : p_subuh[1],
-                        minuter : parseInt(p_subuh[1]) - factor
                 };
                 console.log("Reload Sholat Time, success " + new Date());
                 console.log(parsedJson.data.timings);
@@ -63,6 +59,17 @@ var PrayerTimes = {
                         factor + " menit lagi masuk waktu " + n + ", yuk siap siap sholat\n" +
                         "Waktu " + n + " hari ini pukul " + t.hours + ":" + t.minutes + " WIB";
         }
+};
+
+var GeneralUtil = {
+	normalizeMinute : function(n){
+		var d = parseInt(n) - factor;
+		if(d < 0){
+			return 0;
+		} else {
+			return d;
+		}
+	}
 };
 
 // DO Reload at First launch
@@ -84,7 +91,7 @@ JobPrayerTimes.start();
  * Send Sholat Notification to slack 10 minutes before Sholat Dzuhur
  */
  var JobNotifyPrayerTimesDzuhur = new cron.CronJob({
-        cronTime: '00 ' + t_dzhur.minuter + ' ' + t_dzhur.hours + ' * * *',
+        cronTime: '00 ' + GeneralUtil.normalizeMinute(t_dzhur.minutes) + ' ' + t_dzhur.hours + ' * * *',
         onTick: function() {
                 var msg = PrayerTimes.generateMsg(t_dzhur, "Dzuhur");
                 console.log(new Date() + " - " + msg);
@@ -98,7 +105,7 @@ JobNotifyPrayerTimesDzuhur.start();
  * Send Sholat Notification to slack 10 minutes before Sholat Ashar
  */
  var JobNotifyPrayerTimesAshar = new cron.CronJob({
-        cronTime: '00 ' + t_ashar.minutes + ' ' + t_ashar.hours + ' * * *',
+        cronTime: '00 ' + GeneralUtil.normalizeMinute(t_ashar.minutes) + ' ' + t_ashar.hours + ' * * *',
         onTick: function() {
                 var msg = PrayerTimes.generateMsg(t_ashar, "Ashar");
                 console.log(new Date() + " - " + msg);
@@ -113,7 +120,7 @@ JobNotifyPrayerTimesAshar.start();
  * Send Sholat Notification to slack 10 minutes before Sholat Magrib
  */
  var JobNotifyPrayerTimesMagrib = new cron.CronJob({
-        cronTime: '00 ' + t_magrb.minutes + ' ' + t_magrb.hours + ' * * *',
+        cronTime: '00 ' + GeneralUtil.normalizeMinute(t_magrb.minutes) + ' ' + t_magrb.hours + ' * * *',
         onTick: function() {
                 var msg = PrayerTimes.generateMsg(t_magrb, "Magrib");
                 console.log(new Date() + " - " + msg);
@@ -127,7 +134,7 @@ JobNotifyPrayerTimesMagrib.start();
  * Send Sholat Notification to slack 10 minutes before Sholat Subuh
  */
  var JobNotifyPrayerTimesSubuh = new cron.CronJob({
-        cronTime: '00 ' + t_subuh.minutes + ' ' + t_subuh.hours + ' * * *',
+        cronTime: '00 ' + GeneralUtil.normalizeMinute(t_subuh.minutes) + ' ' + t_subuh.hours + ' * * *',
         onTick: function() {
                 var msg = PrayerTimes.generateMsg(t_subuh, "Subuh");
                 console.log(new Date() + " - " + msg);
