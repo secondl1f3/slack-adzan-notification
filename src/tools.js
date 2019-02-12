@@ -11,41 +11,48 @@ var dateformat = require('dateformat');
 const MS_PER_MINUTE = 60000;
 
 module.exports = {
-    /*
-     * Subtract Formatted Minute, 
-     * parameter :
-     * - param (should be as the following format, e.g. 15:30)
-     * - minute (minute reference)
-     * return :
+    /**
+     * Convert string time to object
      * {
      *     hours : {{hours}}, 
      *     minutes : {{minutes}}
      *  }
      */
-    subtractMinute : function(param, minute){
-        var d = this.subtractMinuteFormat(param, minute, "HH:MM").split(":");
+    toTimeObject : function(param){
+        var d = param.split(":");
         return {
             hours : d[0], 
             minutes : d[1]
-        }
+        } 
+    },
+    /*
+     * Subtract Formatted Minute, 
+     * parameter :
+     * - time (should be as the following format, e.g. 15:30)
+     * - minute (minute reference)
+     * return :
+     * time Object
+     */
+    subtractMinute : function(time, minute){
+        return this.toTimeObject(
+                this.subtractMinuteFormat(
+                    time, minute, "HH:MM"));
+        
     }, 
     /*
      * Subtract Formatted Minute, 
      * parameter :
-     * - param (should be as the following format, e.g. 15:30)
+     * - time (should be as the following format, e.g. 15:30)
      * - minute (minute reference)
      * - formatResult (date format)
      * return :
      * plain text with specific date format
      */
-    subtractMinuteFormat : function(param, minute, formatResult){
-        // Extract Hours and Minutes
-        time = param.split(":");
-
+    subtractMinuteFormat : function(time, minute, formatResult){
         // Prepare Temporary Date
         var d1 = new Date();
-        d1.setHours(time[0]);
-        d1.setMinutes(time[1]);
+        d1.setHours(time.hours);
+        d1.setMinutes(time.minutes);
 
         // Subtract Date
         var d2 = new Date(d1.getTime() - minute * MS_PER_MINUTE);

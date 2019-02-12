@@ -9,11 +9,11 @@ var tools   = require('./tools');
 var request = require('sync-request');
 var concat  = require('concat-stream');
 
-var t_ashar;
-var t_dzhur;
-var t_magrb;
-var t_ishaa;
-var t_subuh;
+var t_ashar; var r_ashar;
+var t_dzhur; var r_dzuhr;
+var t_magrb; var r_magrb;
+var t_ishaa; var r_ishaa;
+var t_subuh; var r_subuh;
 
 // Constant, Minutes before sending notification
 const REMIND_IN_MINUTE = 10;
@@ -26,11 +26,17 @@ var PrayerTimes = {
         var res = request('GET', ADZAN_PUBLIIC_WS);
         var parsedJson = JSON.parse(res.getBody());
 
-        t_dzhur = tools.subtractMinute(parsedJson.data.timings.Dhuhr   , REMIND_IN_MINUTE);
-        t_ashar = tools.subtractMinute(parsedJson.data.timings.Asr     , REMIND_IN_MINUTE);
-        t_magrb = tools.subtractMinute(parsedJson.data.timings.Maghrib , REMIND_IN_MINUTE);
-        t_ishaa = tools.subtractMinute(parsedJson.data.timings.Isha    , REMIND_IN_MINUTE);
-        t_subuh = tools.subtractMinute(parsedJson.data.timings.Fajr    , REMIND_IN_MINUTE);
+        r_dzuhr = tools.toTimeObject(parsedJson.data.timings.Dhuhr);
+        r_ashar = tools.toTimeObject(parsedJson.data.timings.Asr);
+        r_magrb = tools.toTimeObject(parsedJson.data.timings.Maghrib);
+        r_ishaa = tools.toTimeObject(parsedJson.data.timings.Isha);
+        r_subuh = tools.toTimeObject(parsedJson.data.timings.Fajr);
+
+        t_dzhur = tools.subtractMinute(r_dzuhr , REMIND_IN_MINUTE);
+        t_ashar = tools.subtractMinute(r_ashar , REMIND_IN_MINUTE);
+        t_magrb = tools.subtractMinute(r_magrb , REMIND_IN_MINUTE);
+        t_ishaa = tools.subtractMinute(r_ishaa , REMIND_IN_MINUTE);
+        t_subuh = tools.subtractMinute(r_subuh , REMIND_IN_MINUTE);
 
         console.log("Reload Sholat Time, success " + new Date());
         console.log(parsedJson.data.timings);
@@ -76,7 +82,7 @@ new cron({
 new cron({
     cronTime: '00 ' + t_dzhur.minutes + ' ' + t_dzhur.hours + ' * * *',
     onTick: function() {
-        PrayerTimes.doTask(t_dzhur, "Dzuhur");
+        PrayerTimes.doTask(r_dzhur, "Dzuhur");
     },
     start: true
 });
@@ -87,7 +93,7 @@ new cron({
 new cron({
     cronTime: '00 ' + t_ashar.minutes + ' ' + t_ashar.hours + ' * * *',
     onTick: function() {
-        PrayerTimes.doTask(t_ashar, "Ashar");
+        PrayerTimes.doTask(r_ashar, "Ashar");
     },
     start: true
 });
@@ -98,7 +104,7 @@ new cron({
 new cron({
     cronTime: '00 ' + t_magrb.minutes + ' ' + t_magrb.hours + ' * * *',
     onTick: function() {
-        PrayerTimes.doTask(t_magrb, "Magrib");
+        PrayerTimes.doTask(r_magrb, "Magrib");
     },
     start: true
 });
@@ -109,7 +115,7 @@ new cron({
 new cron({
     cronTime: '00 ' + t_ishaa.minutes + ' ' + t_ishaa.hours + ' * * *',
     onTick: function() {
-        PrayerTimes.doTask(t_ishaa, "Isya");
+        PrayerTimes.doTask(r_ishaa, "Isya");
     },
     start: true
 });
@@ -120,7 +126,7 @@ new cron({
 new cron({
     cronTime: '00 ' + t_subuh.minutes + ' ' + t_subuh.hours + ' * * *',
     onTick: function() {
-        PrayerTimes.doTask(t_subuh, "Subuh");
+        PrayerTimes.doTask(r_subuh, "Subuh");
     },
     start: true
 });
