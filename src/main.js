@@ -44,9 +44,9 @@ var PrayerTimes = {
     // Centralize Message Generator
     generateMsg : function(t, n){
         return  "<!channel> \n" +
-                "Assalamualaikum, Ikhwan fillah,. \n" +
-                REMIND_IN_MINUTE + " menit lagi masuk waktu " + n + ", yuk siap siap sholat\n" +
-                "Waktu " + n + " hari ini pukul " + t.hours + ":" + t.minutes + " WIB";
+                "_Assalamualaikum, Ikhwan fillah,._\n" +
+                "*" + REMIND_IN_MINUTE + "* menit lagi masuk waktu " + n + ", yuk siap siap sholat\n" +
+                "Waktu " + n + " hari ini pukul *" + t.hours + ":" + t.minutes + " WIB*";
     }
 };
 
