@@ -16,7 +16,6 @@ module.exports = {
      * parameter :
      * - param (should be as the following format, e.g. 15:30)
      * - minute (minute reference)
-     * 
      * return :
      * {
      *     hours : {{hours}}, 
@@ -36,6 +35,8 @@ module.exports = {
      * - param (should be as the following format, e.g. 15:30)
      * - minute (minute reference)
      * - formatResult (date format)
+     * return :
+     * plain text with specific date format
      */
     subtractMinuteFormat : function(param, minute, formatResult){
         // Extract Hours and Minutes
