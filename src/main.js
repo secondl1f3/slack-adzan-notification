@@ -45,7 +45,7 @@ var PrayerTimes = {
     generateMsg : function(t, n){
         return  "<!channel> \n" +
                 "Assalamualaikum, Ikhwan fillah,. \n" +
-                factor + " menit lagi masuk waktu " + n + ", yuk siap siap sholat\n" +
+                REMIND_IN_MINUTE + " menit lagi masuk waktu " + n + ", yuk siap siap sholat\n" +
                 "Waktu " + n + " hari ini pukul " + t.hours + ":" + t.minutes + " WIB";
     }
 };
