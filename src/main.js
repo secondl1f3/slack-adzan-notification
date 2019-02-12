@@ -26,18 +26,31 @@ var PrayerTimes = {
         var res = request('GET', ADZAN_PUBLIIC_WS);
         var parsedJson = JSON.parse(res.getBody());
 
+        // Set Actual Adzan Times
         r_dzuhr = tools.toTimeObject(parsedJson.data.timings.Dhuhr);
         r_ashar = tools.toTimeObject(parsedJson.data.timings.Asr);
         r_magrb = tools.toTimeObject(parsedJson.data.timings.Maghrib);
         r_ishaa = tools.toTimeObject(parsedJson.data.timings.Isha);
         r_subuh = tools.toTimeObject(parsedJson.data.timings.Fajr);
 
+        // Set Adzan Notification Times
         t_dzhur = tools.subtractMinute(r_dzuhr , REMIND_IN_MINUTE);
         t_ashar = tools.subtractMinute(r_ashar , REMIND_IN_MINUTE);
         t_magrb = tools.subtractMinute(r_magrb , REMIND_IN_MINUTE);
         t_ishaa = tools.subtractMinute(r_ishaa , REMIND_IN_MINUTE);
         t_subuh = tools.subtractMinute(r_subuh , REMIND_IN_MINUTE);
 
+        /*
+         * Set Job Times, for first time should be undefined,
+         * adjust Adzan times every reload.
+         */
+        if(JobDzuhur) JobDzuhur.setTime(this.doCron(t_dzhur));
+        if(JobAshar) JobAshar.setTime(this.doCron(t_ashar));
+        if(JobMagrib) JobMagrib.setTime(this.doCron(t_magrb));
+        if(JobIsya) JobIsya.setTime(this.doCron(t_ishaa));
+        if(JobSubuh) JobSubuh.setTime(this.doCron(t_subuh));
+
+        // Success log
         console.log("Reload Sholat Time, success " + new Date());
         console.log(parsedJson.data.timings);
     },
@@ -52,13 +65,17 @@ var PrayerTimes = {
         return  "<!channel> \n" +
                 "Assalamualaikum, Ikhwan fillah,.\n" +
                 "*" + REMIND_IN_MINUTE + "* menit lagi masuk waktu " + n + ", yuk siap siap sholat\n" +
-                "Waktu " + n + " hari ini pukul *" + t.hours + ":" + t.minutes + " WIB*";
+                "Waktu *" + n + "* hari ini pukul *" + t.hours + ":" + t.minutes + " WIB*";
     },
     // Notify generated Message
     doTask : function(adzanTimes, adzanLabel){
-        var msg = PrayerTimes.message(adzanTimes, adzanLabel);
+        var msg = this.message(adzanTimes, adzanLabel);
         console.log(new Date() + " - " + msg);
-        PrayerTimes.notify(msg);
+        this.notify(msg);
+    },
+    // Prepare Cron Format, based on adzan times
+    doCron : function(adzanTimes){
+        return '00 ' + adzanTimes.minutes + ' ' + adzanTimes.hours + ' * * *'
     }
 };
 
@@ -79,8 +96,8 @@ new cron({
 /**
  * Job Sholat Dzuhur
  */
-new cron({
-    cronTime: '00 ' + t_dzhur.minutes + ' ' + t_dzhur.hours + ' * * *',
+var JobDzuhur = new cron({
+    cronTime: PrayerTimes.doCron(t_dzhur),
     onTick: function() {
         PrayerTimes.doTask(r_dzhur, "Dzuhur");
     },
@@ -90,8 +107,8 @@ new cron({
 /**
  * Job Sholat Ashar
  */
-new cron({
-    cronTime: '00 ' + t_ashar.minutes + ' ' + t_ashar.hours + ' * * *',
+var JobAshar = new cron({
+    cronTime: PrayerTimes.doCron(t_ashar),
     onTick: function() {
         PrayerTimes.doTask(r_ashar, "Ashar");
     },
@@ -101,8 +118,8 @@ new cron({
 /**
  * Job Sholat Magrib
  */
-new cron({
-    cronTime: '00 ' + t_magrb.minutes + ' ' + t_magrb.hours + ' * * *',
+var JobMagrib = new cron({
+    cronTime: PrayerTimes.doCron(t_magrb),
     onTick: function() {
         PrayerTimes.doTask(r_magrb, "Magrib");
     },
@@ -112,8 +129,8 @@ new cron({
 /**
  * Job Sholat Isya
  */
-new cron({
-    cronTime: '00 ' + t_ishaa.minutes + ' ' + t_ishaa.hours + ' * * *',
+var JobIsya = new cron({
+    cronTime: PrayerTimes.doCron(t_ishaa),
     onTick: function() {
         PrayerTimes.doTask(r_ishaa, "Isya");
     },
@@ -123,11 +140,10 @@ new cron({
 /**
  * Job Sholat Subuh
  */
-new cron({
-    cronTime: '00 ' + t_subuh.minutes + ' ' + t_subuh.hours + ' * * *',
+var JobSubuh = new cron({
+    cronTime: PrayerTimes.doCron(t_subuh),
     onTick: function() {
         PrayerTimes.doTask(r_subuh, "Subuh");
     },
     start: true
 });
-
