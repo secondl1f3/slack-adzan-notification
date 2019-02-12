@@ -26,11 +26,11 @@ var PrayerTimes = {
         var res = request('GET', ADZAN_PUBLIIC_WS);
         var parsedJson = JSON.parse(res.getBody());
 
-        t_dzhur = tools.subtractMinuteCron(parsedJson.data.timings.Dhuhr   , REMIND_IN_MINUTE);
-        t_ashar = tools.subtractMinuteCron(parsedJson.data.timings.Asr     , REMIND_IN_MINUTE);
-        t_magrb = tools.subtractMinuteCron(parsedJson.data.timings.Maghrib , REMIND_IN_MINUTE);
-        t_ishaa = tools.subtractMinuteCron(parsedJson.data.timings.Isha    , REMIND_IN_MINUTE);
-        t_subuh = tools.subtractMinuteCron(parsedJson.data.timings.Fajr    , REMIND_IN_MINUTE);
+        t_dzhur = tools.subtractMinute(parsedJson.data.timings.Dhuhr   , REMIND_IN_MINUTE);
+        t_ashar = tools.subtractMinute(parsedJson.data.timings.Asr     , REMIND_IN_MINUTE);
+        t_magrb = tools.subtractMinute(parsedJson.data.timings.Maghrib , REMIND_IN_MINUTE);
+        t_ishaa = tools.subtractMinute(parsedJson.data.timings.Isha    , REMIND_IN_MINUTE);
+        t_subuh = tools.subtractMinute(parsedJson.data.timings.Fajr    , REMIND_IN_MINUTE);
 
         console.log("Reload Sholat Time, success " + new Date());
         console.log(parsedJson.data.timings);

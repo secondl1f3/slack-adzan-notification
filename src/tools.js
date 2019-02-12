@@ -16,8 +16,14 @@ module.exports = {
      * parameter :
      * - param (should be as the following format, e.g. 15:30)
      * - minute (minute reference)
+     * 
+     * return :
+     * {
+     *     hours : {{hours}}, 
+     *     minutes : {{minutes}}
+     *  }
      */
-    subtractMinuteCron : function(param, minute){
+    subtractMinute : function(param, minute){
         var d = this.subtractMinuteFormat(param, minute, "HH:MM").split(":");
         return {
             hours : d[0], 
