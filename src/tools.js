@@ -11,14 +11,6 @@ var dateformat = require('dateformat');
 const MS_PER_MINUTE = 60000;
 
 module.exports = {
-	normalizeMinute : function(n){
-		var d = parseInt(n) - factor;
-		if(d < 0){
-			return 0;
-		} else {
-			return d;
-		}
-    },
     /*
      * Subtract Formatted Minute, 
      * parameter :
