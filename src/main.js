@@ -18,7 +18,7 @@ var t_subuh; var r_subuh;
 // Constant, Minutes before sending notification
 const REMIND_IN_MINUTE = 10;
 const SLACK_CHWEB_HOOK = 'https://hooks.slack.com/services/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';
-const ADZAN_PUBLIIC_WS = 'http://api.aladhan.com/timingsByCity?city=Jakarta&country=ID&method=2';
+const ADZAN_PUBLIIC_WS = 'http://api.aladhan.com/timingsByCity?city=Jakarta&country=ID&method=5';
 
 var PrayerTimes = {
     // Get Sholat Time from api.aladhan.com
