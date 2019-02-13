@@ -5,6 +5,7 @@
  * created : 2017-12-07 20:09
  */
 var cron    = require('cron').CronJob;
+var time    = require('cron').CronTime;
 var tools   = require('./tools');
 var request = require('sync-request');
 var concat  = require('concat-stream');
@@ -44,11 +45,11 @@ var PrayerTimes = {
          * Set Job Times, for first time should be undefined,
          * adjust Adzan times every reload.
          */
-        if(JobDzuhur) JobDzuhur.setTime(this.doCron(t_dzhur));
-        if(JobAshar) JobAshar.setTime(this.doCron(t_ashar));
-        if(JobMagrib) JobMagrib.setTime(this.doCron(t_magrb));
-        if(JobIsya) JobIsya.setTime(this.doCron(t_ishaa));
-        if(JobSubuh) JobSubuh.setTime(this.doCron(t_subuh));
+        if(JobDzuhur) JobDzuhur.setTime(this.newCronTime(t_dzhur));
+        if(JobAshar) JobAshar.setTime(this.newCronTime(t_ashar));
+        if(JobMagrib) JobMagrib.setTime(this.newCronTime(t_magrb));
+        if(JobIsya) JobIsya.setTime(this.newCronTime(t_ishaa));
+        if(JobSubuh) JobSubuh.setTime(this.newCronTime(t_subuh));
 
         // Success log
         console.log("Reload Sholat Time, success " + new Date());
@@ -74,8 +75,12 @@ var PrayerTimes = {
         this.notify(msg);
     },
     // Prepare Cron Format, based on adzan times
-    doCron : function(adzanTimes){
+    cronFormat : function(adzanTimes){
         return '00 ' + adzanTimes.minutes + ' ' + adzanTimes.hours + ' * * *'
+    },
+    // Prepare CronTime, based on adzan times
+    newCronTime : function(adzanTimes){
+        return new time(this.cronFormat(adzanTimes));
     }
 };
 
@@ -97,7 +102,7 @@ new cron({
  * Job Sholat Dzuhur
  */
 var JobDzuhur = new cron({
-    cronTime: PrayerTimes.doCron(t_dzhur),
+    cronTime: PrayerTimes.cronFormat(t_dzhur),
     onTick: function() {
         PrayerTimes.doTask(r_dzhur, "Dzuhur");
     },
@@ -108,7 +113,7 @@ var JobDzuhur = new cron({
  * Job Sholat Ashar
  */
 var JobAshar = new cron({
-    cronTime: PrayerTimes.doCron(t_ashar),
+    cronTime: PrayerTimes.cronFormat(t_ashar),
     onTick: function() {
         PrayerTimes.doTask(r_ashar, "Ashar");
     },
@@ -119,7 +124,7 @@ var JobAshar = new cron({
  * Job Sholat Magrib
  */
 var JobMagrib = new cron({
-    cronTime: PrayerTimes.doCron(t_magrb),
+    cronTime: PrayerTimes.cronFormat(t_magrb),
     onTick: function() {
         PrayerTimes.doTask(r_magrb, "Magrib");
     },
@@ -130,7 +135,7 @@ var JobMagrib = new cron({
  * Job Sholat Isya
  */
 var JobIsya = new cron({
-    cronTime: PrayerTimes.doCron(t_ishaa),
+    cronTime: PrayerTimes.cronFormat(t_ishaa),
     onTick: function() {
         PrayerTimes.doTask(r_ishaa, "Isya");
     },
@@ -141,7 +146,7 @@ var JobIsya = new cron({
  * Job Sholat Subuh
  */
 var JobSubuh = new cron({
-    cronTime: PrayerTimes.doCron(t_subuh),
+    cronTime: PrayerTimes.cronFormat(t_subuh),
     onTick: function() {
         PrayerTimes.doTask(r_subuh, "Subuh");
     },
