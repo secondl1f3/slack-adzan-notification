@@ -11,7 +11,7 @@ var request = require('sync-request');
 var concat  = require('concat-stream');
 
 var t_ashar; var r_ashar;
-var t_dzhur; var r_dzuhr;
+var t_dzhur; var r_dzhur;
 var t_magrb; var r_magrb;
 var t_ishaa; var r_ishaa;
 var t_subuh; var r_subuh;
@@ -28,14 +28,14 @@ var PrayerTimes = {
         var parsedJson = JSON.parse(res.getBody());
 
         // Set Actual Adzan Times
-        r_dzuhr = tools.toTimeObject(parsedJson.data.timings.Dhuhr);
+        r_dzhur = tools.toTimeObject(parsedJson.data.timings.Dhuhr);
         r_ashar = tools.toTimeObject(parsedJson.data.timings.Asr);
         r_magrb = tools.toTimeObject(parsedJson.data.timings.Maghrib);
         r_ishaa = tools.toTimeObject(parsedJson.data.timings.Isha);
         r_subuh = tools.toTimeObject(parsedJson.data.timings.Fajr);
 
         // Set Adzan Notification Times
-        t_dzhur = tools.subtractMinute(r_dzuhr , REMIND_IN_MINUTE);
+        t_dzhur = tools.subtractMinute(r_dzhur , REMIND_IN_MINUTE);
         t_ashar = tools.subtractMinute(r_ashar , REMIND_IN_MINUTE);
         t_magrb = tools.subtractMinute(r_magrb , REMIND_IN_MINUTE);
         t_ishaa = tools.subtractMinute(r_ishaa , REMIND_IN_MINUTE);
