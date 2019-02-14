@@ -17,6 +17,7 @@ module.exports = {
      *     hours : {{hours}}, 
      *     minutes : {{minutes}}
      *  }
+     * 
      */
     toTimeObject : function(param){
         var d = param.split(":");
@@ -32,6 +33,7 @@ module.exports = {
      * - minute (minute reference)
      * return :
      * time Object
+     * 
      */
     subtractMinute : function(time, minute){
         return this.toTimeObject(
@@ -47,6 +49,7 @@ module.exports = {
      * - formatResult (date format)
      * return :
      * plain text with specific date format
+     * 
      */
     subtractMinuteFormat : function(time, minute, formatResult){
         // Prepare Temporary Date
