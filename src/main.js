@@ -20,7 +20,7 @@ var PrayerTimes = {
     reload : function(){
         var res = request('GET', constn.ADZAN_PUBLIIC_WS);
         var parsedJson = JSON.parse(res.getBody());
-        
+
         // Set Adzan Notification Times
         adzan.setTimes(adzanDzuhur  , parsedJson.data.timings.Dhuhr   , "Dzuhur");
         adzan.setTimes(adzanAshar   , parsedJson.data.timings.Asr     , "Ashar");

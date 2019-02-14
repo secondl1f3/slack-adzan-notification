@@ -16,6 +16,7 @@ module.exports = {
      * 
      */
     call : function(message){
+        console.log(new Date() + " " + message);
         var resn = request('POST', constn.SLACK_CHWEB_HOOK, {
             json: { "text" : message }
         });
