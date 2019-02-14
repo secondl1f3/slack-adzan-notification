@@ -7,7 +7,7 @@
  */
 var cron    = require('cron').CronJob;
 var slack   = require('./slack');
-var tools   = require('./tools');
+var common  = require('./common');
 var constn  = require('./constant');
 
 module.exports = {
@@ -26,10 +26,10 @@ module.exports = {
         }
         
         // Convert Time String to Adzan Times
-        var adzanTimes  = tools.toTimeObject(times);
+        var adzanTimes  = common.toTimeObject(times);
         // Adzan times notification, 
         // set to be notfied 10 minute before Actual Adzan Times.
-        var notifyTimes = tools.subtractMinute(adzanTimes , constn.REMIND_IN_MINUTE);
+        var notifyTimes = common.subtractMinute(adzanTimes , constn.REMIND_IN_MINUTE);
 
         cronjob = new cron({
             cronTime: this.cronFormat(notifyTimes),

@@ -5,10 +5,8 @@
  * author : rio.bastian
  * created : 2019-02-12 14:45
  */
+var constn     = require('./constant');
 var dateformat = require('dateformat');
-
-// Millisecond number in 1 minute
-const MS_PER_MINUTE = 60000;
 
 module.exports = {
     /**
@@ -58,7 +56,7 @@ module.exports = {
         d1.setMinutes(time.minutes);
 
         // Subtract Date
-        var d2 = new Date(d1.getTime() - minute * MS_PER_MINUTE);
+        var d2 = new Date(d1.getTime() - minute * constn.MILIS_PER_MINUTE);
         return dateformat(d2, formatResult);
     }
 };
