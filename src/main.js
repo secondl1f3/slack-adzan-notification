@@ -4,33 +4,61 @@
  * author : rio.bastian@metraplasa.co.id
  * created : 2017-12-07 20:09
  */
-var adzan   = require('./adzan');
-var constn  = require('./constant');
-var request = require('sync-request');
-var cronjob = require('cron').CronJob;
+var constn   = require('./constant');
+var cronjob  = require('cron').CronJob;
+var schedule = require('./schedule');
 
 var adzanDzuhur,
     adzanAshar,
-    adzanMagrib,
+    adzanMaghrib,
     adzanIsya,
     adzanSubuh;
 
 var PrayerTimes = {
     // Get Sholat Time from api.aladhan.com
     reload : function(){
-        var res = request('GET', constn.ADZAN_PUBLIIC_WS);
-        var parsedJson = JSON.parse(res.getBody());
+        
+        /**
+         * Adzan Endpoint, 
+         * you can add the implementation at ../impl/.., 
+         * and adjust the assignment in following line code
+         */
+        var Aladhan = require('./impl/Aladhan');
+        let adzan   = new Aladhan();
 
-        // Set Adzan Notification Times
-        adzanDzuhur = adzan.setTimes(adzanDzuhur  , parsedJson.data.timings.Dhuhr   , "Dzuhur");
-        adzanAshar  = adzan.setTimes(adzanAshar   , parsedJson.data.timings.Asr     , "Ashar");
-        adzanMagrib = adzan.setTimes(adzanMagrib  , parsedJson.data.timings.Maghrib , "Maghrib");
-        adzanIsya   = adzan.setTimes(adzanIsya    , parsedJson.data.timings.Isha    , "Isya");
-        adzanSubuh  = adzan.setTimes(adzanSubuh   , parsedJson.data.timings.Fajr    , "Subuh");
+        // Set Adzan Dzuhur Notification
+        if(adzanDzuhur){
+            adzanDzuhur.stop();
+        }
+        adzanDzuhur = schedule.setDzuhurTimes(adzan);
+
+        // Set Adzan Ashar Notification
+        if(adzanAshar){
+            adzanAshar.stop();
+        }
+        adzanAshar  = schedule.setAsharTimes(adzan);
+
+        // Set Adzan Maghrib Notification
+        if(adzanMaghrib){
+            adzanMaghrib.stop();
+        }
+        adzanMaghrib = schedule.setMaghribTimes(adzan);
+
+        // Set Adzan Isya Notification
+        if(adzanIsya){
+            adzanIsya.stop();
+        }
+        adzanIsya   = schedule.setIsyaTimes(adzan);
+
+        // Set Adzan Subuh Notification
+        if(adzanSubuh){
+            adzanSubuh.stop();
+        }
+        adzanSubuh  = schedule.setSubuhTimes(adzan);
 
         // Success log
         console.log("Reload Sholat Time, success " + new Date());
-        console.log(parsedJson.data.timings);
+        console.log(adzan.parsedJson);
     }
 };
 

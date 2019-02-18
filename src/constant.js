@@ -11,7 +11,6 @@ module.exports = Object.freeze({
     // Millisecond number in 1 minute
     MILIS_PER_MINUTE : 60000,
     // Constant, Slack Channel Web Hook
-    SLACK_CHWEB_HOOK : 'https://hooks.slack.com/services/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',
-    // Adzan Public Web Service
-    ADZAN_PUBLIIC_WS : 'http://api.aladhan.com/timingsByCity?city=Jakarta&country=ID&method=5'
+    // SLACK_CHWEB_HOOK : 'https://hooks.slack.com/services/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',
+    SLACK_CHWEB_HOOK : 'https://hooks.slack.com/services/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'
 });

@@ -1,5 +1,5 @@
 /**
- * slack.js
+ * notification.js
  * Used to Send Notification to Slack
  * 
  * author : rio.bastian
@@ -9,11 +9,9 @@ var request = require('sync-request');
 var constn  = require('./constant');
 
 module.exports = {
-    /*
+    /**
      * Slack Notification Procedure
-     * parameter :
-     * - message (message to be notified)
-     * 
+     * @param {*} message 
      */
     call : function(message){
         console.log(new Date() + " " + message);
@@ -21,12 +19,10 @@ module.exports = {
             json: { "text" : message }
         });
     },
-    /*
+    /**
      * Message Formatter
-     * parameter :
-     * - adzanTimes (Adzan Times)
-     * - adzanLabel (Adzan Label)
-     * 
+     * @param {*} adzanTimes 
+     * @param {*} adzanLabel 
      */
     msgformat : function(adzanTimes, adzanLabel){
         return  "<!channel> \n" +
@@ -34,12 +30,10 @@ module.exports = {
                 "*" + constn.REMIND_IN_MINUTE + "* menit lagi masuk waktu " + adzanLabel + ", yuk siap siap sholat\n" +
                 "Waktu *" + adzanLabel + "* hari ini pukul *" + adzanTimes.hours + ":" + adzanTimes.minutes + " WIB.*";
     },
-    /*
+    /**
      * Notify generated Message to Slack
-     * parameter :
-     * - adzanTimes (Adzan Times)
-     * - adzanLabel (Adzan Label)
-     * 
+     * @param {*} adzanTimes 
+     * @param {*} adzanLabel 
      */
     notify : function(adzanTimes, adzanLabel){
         this.call(
