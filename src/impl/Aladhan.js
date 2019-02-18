@@ -4,7 +4,7 @@ var Adzan   = require('../api/Adzan');
 /**
  * Aladhan, 
  * Aladhan is one of the Free Adzan API,
- * This is the class which implement AdzanEndpoint.
+ * This is the class which implement Adzan.
  * 
  * author : rio.bastian
  * created : 2019-02-18 14:22

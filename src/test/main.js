@@ -16,10 +16,11 @@ console.log(tools.subtractMinute(adzantimes2, 10));
  * Test :: Adzan Endpoint
  */
 var Aladhan = require('../impl/Aladhan');
-let adz = new Aladhan();
-console.log(adz.parsedJson);
-console.log(adz.getDzuhur());
-console.log(adz.getAshar());
-console.log(adz.getMaghrib());
-console.log(adz.getIsya());
-console.log(adz.getSubuh());
+var Kemenag = require('../impl/Kemenag');
+//let adzan   = new Aladhan();
+let adzan   = new Kemenag();
+console.log(adzan.getDzuhur());
+console.log(adzan.getAshar());
+console.log(adzan.getMaghrib());
+console.log(adzan.getIsya());
+console.log(adzan.getSubuh());

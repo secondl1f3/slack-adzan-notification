@@ -21,8 +21,12 @@ var PrayerTimes = {
          * you can add the implementation at ../impl/.., 
          * and adjust the assignment in the following line code
          */
-        var Aladhan = require('./impl/Aladhan');
-        let adzan   = new Aladhan();
+        // Aladhan
+        // var Aladhan = require('./impl/Aladhan');
+        // let adzan   = new Aladhan();
+        // Kemenag RI
+        var Kemenag = require('./impl/Kemenag');
+        let adzan   = new Kemenag();
 
         // Set Adzan Dzuhur Notification
         if(adzanDzuhur){
