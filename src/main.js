@@ -16,11 +16,10 @@ var adzanDzuhur,
 var PrayerTimes = {
     // Get Sholat Time from api.aladhan.com
     reload : function(){
-        
-        /**
+        /*
          * Adzan Endpoint, 
          * you can add the implementation at ../impl/.., 
-         * and adjust the assignment in following line code
+         * and adjust the assignment in the following line code
          */
         var Aladhan = require('./impl/Aladhan');
         let adzan   = new Aladhan();
