@@ -11,11 +11,11 @@ var dateformat = require('dateformat');
 module.exports = {
     /**
      * Convert string time to object
-     * {
-     *     hours : {{hours}}, 
-     *     minutes : {{minutes}}
+     * @param {*} param 
+     * @returns {*} {
+     *     hours : hours-value, 
+     *     minutes : minute-value
      *  }
-     * 
      */
     toTimeObject : function(param){
         var d = param.split(":");
@@ -24,14 +24,11 @@ module.exports = {
             minutes : d[1]
         } 
     },
-    /*
-     * Subtract Formatted Minute, 
-     * parameter :
-     * - time (should be as the following format, e.g. 15:30)
-     * - minute (minute reference)
-     * return :
-     * time Object
-     * 
+    /**
+     * Subtract Formatted Minute
+     * @param {*} time 
+     * @param {*} minute
+     * @returns {*} Substracted TimesObject 
      */
     subtractMinute : function(time, minute){
         return this.toTimeObject(
@@ -39,15 +36,11 @@ module.exports = {
                     time, minute, "HH:MM"));
         
     }, 
-    /*
-     * Subtract Formatted Minute, 
-     * parameter :
-     * - time (should be as the following format, e.g. 15:30)
-     * - minute (minute reference)
-     * - formatResult (date format)
-     * return :
-     * plain text with specific date format
-     * 
+    /**
+     * Subtract Minute, with formatted Times String
+     * @param {*} time 
+     * @param {*} minute 
+     * @param {*} formatResult 
      */
     subtractMinuteFormat : function(time, minute, formatResult){
         // Prepare Temporary Date

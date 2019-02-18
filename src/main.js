@@ -35,7 +35,7 @@ var PrayerTimes = {
         if(adzanAshar){
             adzanAshar.stop();
         }
-        adzanAshar  = schedule.setAsharTimes(adzan);
+        adzanAshar = schedule.setAsharTimes(adzan);
 
         // Set Adzan Maghrib Notification
         if(adzanMaghrib){
@@ -47,13 +47,13 @@ var PrayerTimes = {
         if(adzanIsya){
             adzanIsya.stop();
         }
-        adzanIsya   = schedule.setIsyaTimes(adzan);
+        adzanIsya = schedule.setIsyaTimes(adzan);
 
         // Set Adzan Subuh Notification
         if(adzanSubuh){
             adzanSubuh.stop();
         }
-        adzanSubuh  = schedule.setSubuhTimes(adzan);
+        adzanSubuh = schedule.setSubuhTimes(adzan);
 
         // Success log
         console.log("Reload Sholat Time, success " + new Date());
