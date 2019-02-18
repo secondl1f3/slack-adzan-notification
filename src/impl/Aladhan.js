@@ -30,6 +30,7 @@ class Aladhan extends Adzan {
     charge(){
         var res = request('GET', this.endpoint());
         this.parsedJson = JSON.parse(res.getBody());
+        console.log(this.parsedJson.data.timings);
     }
     /*
      * Get Dzuhur Time

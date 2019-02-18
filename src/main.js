@@ -57,7 +57,6 @@ var PrayerTimes = {
 
         // Success log
         console.log("Reload Sholat Time, success " + new Date());
-        console.log(adzan.parsedJson);
     }
 };
 
