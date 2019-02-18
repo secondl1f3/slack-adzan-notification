@@ -22,11 +22,11 @@ var PrayerTimes = {
         var parsedJson = JSON.parse(res.getBody());
 
         // Set Adzan Notification Times
-        adzan.setTimes(adzanDzuhur  , parsedJson.data.timings.Dhuhr   , "Dzuhur");
-        adzan.setTimes(adzanAshar   , parsedJson.data.timings.Asr     , "Ashar");
-        adzan.setTimes(adzanMagrib  , parsedJson.data.timings.Maghrib , "Maghrib");
-        adzan.setTimes(adzanIsya    , parsedJson.data.timings.Isha    , "Isya");
-        adzan.setTimes(adzanSubuh   , parsedJson.data.timings.Fajr    , "Subuh");
+        adzanDzuhur = adzan.setTimes(adzanDzuhur  , parsedJson.data.timings.Dhuhr   , "Dzuhur");
+        adzanAshar  = adzan.setTimes(adzanAshar   , parsedJson.data.timings.Asr     , "Ashar");
+        adzanMagrib = adzan.setTimes(adzanMagrib  , parsedJson.data.timings.Maghrib , "Maghrib");
+        adzanIsya   = adzan.setTimes(adzanIsya    , parsedJson.data.timings.Isha    , "Isya");
+        adzanSubuh  = adzan.setTimes(adzanSubuh   , parsedJson.data.timings.Fajr    , "Subuh");
 
         // Success log
         console.log("Reload Sholat Time, success " + new Date());

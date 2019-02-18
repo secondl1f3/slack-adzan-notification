@@ -38,6 +38,8 @@ module.exports = {
             }, 
             start: true
         });
+
+        return cronjob;
     },
     /*
      * Prepare Cron Format, based on adzan times
