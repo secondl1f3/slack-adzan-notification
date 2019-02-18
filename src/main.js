@@ -4,7 +4,6 @@
  * author : rio.bastian@metraplasa.co.id
  * created : 2017-12-07 20:09
  */
-var constn   = require('./constant');
 var cronjob  = require('cron').CronJob;
 var schedule = require('./schedule');
 
