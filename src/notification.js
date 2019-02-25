@@ -7,6 +7,7 @@
  */
 var request = require('sync-request');
 var constn  = require('./constant');
+var format  = require('string-format');
 
 module.exports = {
     /**
@@ -25,10 +26,13 @@ module.exports = {
      * @param {*} adzanLabel 
      */
     msgformat : function(adzanTimes, adzanLabel){
-        return  "<!channel> \n" +
-                "Assalamualaikum, Ikhwan fillah,.\n" +
-                "*" + constn.REMIND_IN_MINUTE + "* menit lagi masuk waktu " + adzanLabel + ", yuk siap siap sholat\n" +
-                "Waktu *" + adzanLabel + "* hari ini pukul *" + adzanTimes.hours + ":" + adzanTimes.minutes + " WIB.*";
+        return format(
+                '<!channel>{0}'+
+                'Assalamualaikum, Ikhwan fillah,.{0}'+
+                '*{1}* menit lagi masuk waktu {2}, yuk siap siap sholat.{0}'+
+                'Waktu *{2}* hari ini pukul *{3}:{4} WIB.*', 
+                '\n', constn.REMIND_IN_MINUTE, adzanLabel, 
+                adzanTimes.hours, adzanTimes.minutes);
     },
     /**
      * Notify generated Message to Slack

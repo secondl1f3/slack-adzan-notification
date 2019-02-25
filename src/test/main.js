@@ -1,6 +1,5 @@
 /**
  * Test :: Subtract Minute
- *
  */
 var tools = require("../common");
 
@@ -24,3 +23,8 @@ console.log(adzan.getAshar());
 console.log(adzan.getMaghrib());
 console.log(adzan.getIsya());
 console.log(adzan.getSubuh());
+
+/**
+ * Test :: Notification Message Format
+ */
+console.log(notif.msgformat(tools.toTimeObject("18:05"),'Magrib'));
