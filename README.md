@@ -27,8 +27,3 @@ sudo apt-get install -y nodejs
 ```
 ./start.sh
 ```
-
-## Contributors
-| Name | Email | Role |
-| ------------ | ------------ | ------------ |
-| Rio Bastian | rio.bastian@metranet.co.id | Authors |
