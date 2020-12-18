@@ -25,6 +25,17 @@ $ docker build --tag app-adzan:1.0.0 .
 $ docker-compose -f deploy/docker-compose.yml up -d
 ```
 
+#### 3. Run the application from Docker Hub
+```
+$ docker pull altanovela/app-adzan:1.0.0
+$ docker run -d --rm \
+--name slack-adzan-notification \
+-e SLACK_CHWEB_HOOK=https://hooks.slack.com/services/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 \
+-e LOCATION_COUNTRY=ID \
+-e LOCATION_CITY=Jakarta \
+altanovela/app-adzan:1.0.0
+```
+
 ## Contributors
 | Name | Email | Role |
 | ------------ | ------------ | ------------ |
