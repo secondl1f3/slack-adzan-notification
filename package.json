@@ -1,0 +1,25 @@
+{
+  "name": "slack-adzan-notification",
+  "version": "1.0.0",
+  "description": "Adzan Notification in your Slack Channel",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "src/test/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.playcourt.id/riobastian/slack-adzan-notification.git"
+  },
+  "keywords": [
+    "adzan",
+    "slack"
+  ],
+  "author": "rio.bastian@metranet.co.id",
+  "license": "MIT",
+  "dependencies": {
+    "cron": "^1.8.2",
+    "dateformat": "^4.3.1",
+    "string-format": "^2.0.0",
+    "sync-request": "^6.1.0"
+  }
+}

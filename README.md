@@ -15,15 +15,17 @@ Warm Regards
 Please follow this link to setup your [Slack Channel Webhook](https://slack.com/intl/en-id/help/articles/115005265063-Incoming-webhooks-for-Slack)
 
 #### 2. Integrate
-Setup your channel Webhook URL in the application, here : [SLACK_CHWEB_HOOK](src/constant.js#L14)
+Setup your channel Webhook URL, Country Location, City Location in the System Environment, or if using docker you can set the value in the [docker-compose.yml](deploy/docker-compose.yml#L7)
 
-#### 3. Install node
+#### 3. Run the application
 ```
-curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
-sudo apt-get install -y nodejs
+$ git clone http://gitlab.playcourt.id/riobastian/slack-adzan-notification.git
+$ cd slack-adzan-notification
+$ docker build --tag app-adzan:1.0.0 .
+$ docker-compose -f deploy/docker-compose.yml up -d
 ```
 
-#### 4. Run the application
-```
-./start.sh
-```
+## Contributors
+| Name | Email | Role |
+| ------------ | ------------ | ------------ |
+| Rio Bastian | rio.bastian@metranet.co.id | Authors |

@@ -1,5 +1,6 @@
-var request = require('sync-request');
-var Adzan   = require('../api/Adzan');
+var request  = require('sync-request');
+var Adzan    = require('../api/Adzan');
+var constant = require('../constant');
 
 /**
  * Aladhan, 
@@ -21,7 +22,9 @@ class Aladhan extends Adzan {
      * Aladhan Endpoint API
      */
     endpoint(){
-        return 'http://api.aladhan.com/timingsByCity?city=Jakarta&country=ID&method=5';
+        var ctry = constant.LOCATION_COUNTRY;
+        var city = constant.LOCATION_CITY;
+        return 'http://api.aladhan.com/timingsByCity?city='+city+'&country='+ctry+'&method=5';
     }
     /*
      * Charge API
@@ -30,7 +33,6 @@ class Aladhan extends Adzan {
     charge(){
         var res = request('GET', this.endpoint());
         this.parsedJson = JSON.parse(res.getBody());
-        console.log(this.parsedJson.data.timings);
     }
     /*
      * Get Dzuhur Time

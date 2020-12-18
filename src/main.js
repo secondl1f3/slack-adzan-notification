@@ -6,6 +6,7 @@
  */
 var cronjob  = require('cron').CronJob;
 var schedule = require('./schedule');
+var constant = require('./constant');
 
 var adzanDzuhur,
     adzanAshar,
@@ -58,10 +59,17 @@ var PrayerTimes = {
         }
         adzanSubuh = schedule.setSubuhTimes(adzan);
 
-        // Success log
         console.log("Reload Sholat Time, success " + new Date());
     }
 };
+
+// Success log
+console.log("-- Slack Adzan Notification started.")
+console.log("-- Parameter : ")
+console.log("-- Channel Web Hook [" + constant.SLACK_CHWEB_HOOK + "]");
+console.log("-- Location Country [" + constant.LOCATION_COUNTRY + "]");
+console.log("-- Location City    [" + constant.LOCATION_CITY + "]");
+console.log("--")
 
 // Do Reload at First launch
 PrayerTimes.reload();
