@@ -25,7 +25,7 @@ $ docker build --tag app-adzan:1.0.0 .
 $ docker-compose -f deploy/docker-compose.yml up -d
 ```
 
-#### 3. Run the application from Docker Hub
+#### 4. or, Run the application from Docker Hub
 ```
 $ docker pull altanovela/app-adzan:1.0.0
 $ docker run -d --rm \
