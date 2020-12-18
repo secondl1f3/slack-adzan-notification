@@ -5,6 +5,6 @@ services:
     container_name: slack_adzan_notif
     image: app-adzan:1.0.0
     environment:
-      - SLACK_CHWEB_HOOK=https://hooks.slack.com/services/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
+      - SLACK_CHWEB_HOOK=https://hooks.slack.com/services/xxx
       - LOCATION_COUNTRY=ID
       - LOCATION_CITY=Jakarta
